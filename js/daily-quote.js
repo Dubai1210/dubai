@@ -71,36 +71,11 @@
   var today = new Date();
   var dateKey = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-  // 检查缓存（清除旧缓存）
-  var cached = null;
-  try {
-    localStorage.removeItem('daily-quote-cache');
-    localStorage.removeItem('dq-cache');
-    localStorage.removeItem('dq-v');
-    cached = null; // 强制不使用缓存
-  } catch (e) {}
-
-  // 如果缓存日期是今天，直接使用
-  if (cached && cached.date === dateKey) {
-    el.textContent = cached.text;
-    if (authorEl) authorEl.textContent = '—— ' + cached.author;
-    return;
-  }
-
-  // 否则生成今日名言
+  // 生成今日名言（不使用缓存）
   var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
   var index = seed % quotes.length;
   var quote = quotes[index];
 
   el.textContent = quote.text;
   if (authorEl) authorEl.textContent = '—— ' + quote.author;
-
-  // 缓存今日名言
-  try {
-    localStorage.setItem('dq-cache', JSON.stringify({
-      date: dateKey,
-      text: quote.text,
-      author: quote.author
-    }));
-  } catch (e) {}
 })();
