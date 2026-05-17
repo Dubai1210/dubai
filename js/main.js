@@ -284,13 +284,17 @@ document.addEventListener('DOMContentLoaded', function () {
       try { return localStorage.getItem('bg-music-user-paused') === '1'; } catch (e) { return false; }
     }
 
-    function doPlay() {
+    function doPlay(muted) {
       if (bgMusic.paused) {
-        applyBgmVol(); // 确保使用用户音量
+        if (muted) {
+          bgMusic.muted = true;
+        } else {
+          applyBgmVol();
+          bgMusic.muted = false;
+        }
         if (bgMusic.readyState === 0) bgMusic.load();
         bgMusic.play().then(function () {
           audioPlayer.classList.add('playing');
-          // 播放成功，保存状态
           localStorage.setItem('bg-music-user-paused', '0');
         }).catch(function () {});
       }
@@ -304,22 +308,25 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.WNBridge) { WNBridge.pause(); }
     }
 
-    // 自动播放
-    if (!isUserPaused()) { startPlay(); }
-
-    // 浏览器阻止自动播放时，首次交互恢复
-    if (bgMusic.paused && !isUserPaused()) {
-      var interactionEvents = ['click', 'touchstart', 'scroll', 'keydown'];
-      function onFirstInteraction() {
-        if (bgMusic.paused && !isUserPaused()) { startPlay(); }
-        interactionEvents.forEach(function (evt) {
-          document.removeEventListener(evt, onFirstInteraction, true);
-        });
-      }
-      interactionEvents.forEach(function (evt) {
-        document.addEventListener(evt, onFirstInteraction, true);
-      });
+    // 自动播放（静音模式绕过浏览器限制）
+    if (!isUserPaused()) {
+      doPlay(true);
     }
+
+    // 用户首次交互时取消静音
+    var hasInteracted = false;
+    function onFirstInteraction() {
+      if (!hasInteracted) {
+        hasInteracted = true;
+        if (!bgMusic.paused && bgMusic.muted) {
+          bgMusic.muted = false;
+          applyBgmVol();
+        }
+      }
+    }
+    document.addEventListener('click', onFirstInteraction, { once: true });
+    document.addEventListener('touchstart', onFirstInteraction, { once: true });
+    document.addEventListener('keydown', onFirstInteraction, { once: true });
 
     audioDisc.addEventListener('click', function (e) {
       e.stopPropagation();
