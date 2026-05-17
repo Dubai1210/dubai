@@ -41,6 +41,7 @@
   ];
 
   var el = document.getElementById('daily-quote');
+  var authorEl = document.getElementById('daily-quote-author');
   if (!el) return;
 
   // 生成今日日期键
@@ -56,6 +57,7 @@
   // 如果缓存日期是今天，直接使用
   if (cached && cached.date === dateKey) {
     el.textContent = cached.text;
+    if (authorEl) authorEl.textContent = '—— ' + cached.author;
     return;
   }
 
@@ -65,12 +67,14 @@
   var quote = quotes[index];
 
   el.textContent = quote.text;
+  if (authorEl) authorEl.textContent = '—— ' + quote.author;
 
   // 缓存今日名言
   try {
     localStorage.setItem('daily-quote-cache', JSON.stringify({
       date: dateKey,
-      text: quote.text
+      text: quote.text,
+      author: quote.author
     }));
   } catch (e) {}
 })();
