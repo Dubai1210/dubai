@@ -290,6 +290,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (bgMusic.readyState === 0) bgMusic.load();
         bgMusic.play().then(function () {
           audioPlayer.classList.add('playing');
+          // 播放成功，保存状态
+          localStorage.setItem('bg-music-user-paused', '0');
         }).catch(function () {});
       }
     }
@@ -322,8 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     audioDisc.addEventListener('click', function (e) {
       e.stopPropagation();
       if (bgMusic.paused) {
-        // 用户点击播放：清除暂停标记，若白噪音活跃则暂停白噪音
-        localStorage.setItem('bg-music-user-paused', '0');
+        // 用户点击播放：若白噪音活跃则暂停白噪音
         if (isWhiteNoiseActive()) { pauseWN(); }
         doPlay();
       } else {
