@@ -48,10 +48,11 @@
   var today = new Date();
   var dateKey = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-  // 检查缓存
+  // 检查缓存（清除旧缓存）
   var cached = null;
   try {
-    cached = JSON.parse(localStorage.getItem('daily-quote-cache'));
+    localStorage.removeItem('daily-quote-cache');
+    cached = JSON.parse(localStorage.getItem('dq-cache'));
   } catch (e) {}
 
   // 如果缓存日期是今天，直接使用
@@ -71,7 +72,7 @@
 
   // 缓存今日名言
   try {
-    localStorage.setItem('daily-quote-cache', JSON.stringify({
+    localStorage.setItem('dq-cache', JSON.stringify({
       date: dateKey,
       text: quote.text,
       author: quote.author
