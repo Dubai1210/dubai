@@ -1,0 +1,413 @@
+/* ============================================================
+   历史上的今天 — 专属样式
+   ============================================================ */
+
+/* ---------- 页面标题 ---------- */
+.tih-hero {
+  text-align: center;
+  padding: clamp(48px, 8vw, 80px) var(--container-padding) clamp(24px, 4vw, 40px);
+  position: relative;
+}
+
+.tih-hero-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.3);
+  animation: fadeInScale 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.tih-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text);
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+}
+
+.tih-date-display {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
+}
+
+.tih-date-num {
+  color: #F59E0B;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* ---------- 日期选择器 ---------- */
+.tih-date-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 var(--container-padding);
+  margin-bottom: clamp(24px, 4vw, 40px);
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
+}
+
+.tih-date-input {
+  padding: 10px 18px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.tih-date-input:focus {
+  border-color: #F59E0B;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.tih-date-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.tih-date-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.tih-date-btn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- 事件时间轴 ---------- */
+.tih-timeline {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding) clamp(40px, 6vw, 80px);
+  position: relative;
+}
+
+.tih-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--color-border-strong) 5%, var(--color-border-strong) 95%, transparent);
+  transform: translateX(-50%);
+}
+
+/* ---------- 事件卡片 ---------- */
+.tih-event {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.tih-event.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 奇数在左，偶数在右 */
+.tih-event:nth-child(odd) {
+  flex-direction: row;
+  padding-right: calc(50% + 28px);
+}
+
+.tih-event:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: calc(50% + 28px);
+}
+
+/* 时间轴圆点 */
+.tih-event-dot {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 3px solid #F59E0B;
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.tih-event:hover .tih-event-dot {
+  background: #F59E0B;
+  transform: translateX(-50%) scale(1.3);
+}
+
+/* 卡片主体 */
+.tih-event-card {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 2px 12px var(--color-shadow);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s, border-color 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.tih-event-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F59E0B, #7C3AED);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tih-event:hover .tih-event-card {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px var(--color-shadow-strong);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.tih-event:hover .tih-event-card::before {
+  opacity: 1;
+}
+
+/* 年份标签 */
+.tih-event-year {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(124, 58, 237, 0.08));
+  color: #D97706;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .tih-event-year {
+  color: #FBBF24;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(124, 58, 237, 0.1));
+}
+
+/* 事件描述 */
+.tih-event-text {
+  font-size: 0.92rem;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+/* 分类标签 */
+.tih-event-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  --tag-opacity: 0.1;
+}
+
+[data-theme="dark"] .tih-event-tag { --tag-opacity: 0.15; }
+
+.tih-event-tag.politics  { background: rgba(239, 68, 68, var(--tag-opacity)); color: #EF4444; }
+.tih-event-tag.science   { background: rgba(59, 130, 246, var(--tag-opacity)); color: #3B82F6; }
+.tih-event-tag.culture   { background: rgba(168, 85, 247, var(--tag-opacity)); color: #A855F7; }
+.tih-event-tag.sports    { background: rgba(34, 197, 94, var(--tag-opacity)); color: #22C55E; }
+.tih-event-tag.war       { background: rgba(239, 68, 68, var(--tag-opacity)); color: #DC2626; }
+.tih-event-tag.tech      { background: rgba(6, 182, 212, var(--tag-opacity)); color: #0891B2; }
+.tih-event-tag.people    { background: rgba(245, 158, 11, var(--tag-opacity)); color: #D97706; }
+
+/* ---------- 底部返回按钮 ---------- */
+.tih-back {
+  text-align: center;
+  padding: clamp(24px, 4vw, 48px) var(--container-padding) clamp(40px, 6vw, 80px);
+}
+
+.tih-back .btn-primary {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+}
+
+.tih-back .btn-primary:hover {
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
+}
+
+/* ---------- 空状态 / 加载 ---------- */
+.tih-empty,
+.tih-loading {
+  text-align: center;
+  padding: clamp(40px, 8vw, 80px) var(--container-padding);
+}
+
+.tih-empty-icon {
+  font-size: 3rem;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.tih-empty-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.tih-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top-color: #F59E0B;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- 更多事件按钮 ---------- */
+.tih-more-btn {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.tih-more-btn-inner {
+  padding: 10px 32px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.tih-more-btn-inner:hover {
+  border-color: #F59E0B;
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ---------- 返回顶部按钮 ---------- */
+.back-to-top {
+  position: fixed;
+  bottom: 130px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  color: var(--color-text-secondary);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s, color 0.2s;
+  z-index: 999;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-primary-hex);
+  color: #fff;
+  border-color: var(--color-primary-hex);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 768px) {
+  .tih-timeline::before {
+    left: 20px;
+  }
+
+  .tih-event,
+  .tih-event:nth-child(odd),
+  .tih-event:nth-child(even) {
+    flex-direction: row;
+    padding-left: 48px;
+    padding-right: 0;
+  }
+
+  .tih-event-dot {
+    left: 20px;
+  }
+
+  .tih-date-picker {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tih-date-input,
+  .tih-date-btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+
+  .tih-event-card {
+    padding: 16px 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tih-hero-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+  }
+
+  .tih-event-text {
+    font-size: 0.85rem;
+  }
+
+  .tih-event-year {
+    font-size: 0.75rem;
+  }
+}

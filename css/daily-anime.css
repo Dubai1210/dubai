@@ -1,0 +1,239 @@
+/* ============================================================
+   每日看番推荐 — 卡片版样式
+   ============================================================ */
+
+/* ---------- 导航返回按钮 ---------- */
+.navbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 550;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  margin-right: auto;
+}
+.navbar-back:hover { color: var(--color-text); background: var(--color-bg-alt); }
+.navbar-back i { font-size: 1.1rem; position: relative; top: 2px; }
+
+/* ---------- 页面标题 ---------- */
+.da-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px 36px;
+  gap: 10px;
+}
+
+.da-hero-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-xl);
+  background: rgba(var(--color-primary), 0.1);
+  color: var(--color-primary-hex);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.da-title {
+  font-size: var(--fs-hero-title);
+  font-weight: 700;
+  color: var(--color-text);
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.da-date {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+/* ---------- 卡片网格 ---------- */
+.da-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.da-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ---------- 卡片 ---------- */
+.da-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s;
+  animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.da-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px var(--color-shadow);
+  border-color: var(--color-border-strong);
+}
+
+/* 顶部行 */
+.da-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.da-card-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(var(--color-primary), 0.1);
+  color: var(--color-primary-hex);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.da-card-score i { font-size: 0.65rem; }
+
+.da-card-year {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* 标题 */
+.da-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.da-card-title-en {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  margin-top: -4px;
+}
+
+/* 标签行 */
+.da-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.da-card-tag {
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  font-weight: 500;
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+/* 简介 */
+.da-card-summary {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* 推荐理由 */
+.da-card-reason {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+.da-card-reason-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-primary-hex);
+  margin-bottom: 5px;
+}
+.da-card-reason-label i { font-size: 0.75rem; }
+
+.da-card-reason p {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 台词引用 */
+.da-card-quote {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  padding-left: 10px;
+  border-left: 2px solid var(--color-primary-hex);
+}
+
+/* ---------- 加载更多 ---------- */
+.da-load-more-wrap {
+  text-align: center;
+  padding: 32px 0 16px;
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.da-load-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 28px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  font-weight: 550;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.da-load-more:hover {
+  border-color: var(--color-primary-hex);
+  color: var(--color-primary-hex);
+  background: rgba(var(--color-primary), 0.05);
+  transform: translateY(-1px);
+}
+
+.da-load-more i { font-size: 1.1rem; position: relative; top: 2px; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px) {
+  .da-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .da-hero { padding: 40px 16px 24px; }
+  .da-container { padding: 0 12px 40px; }
+  .da-grid { grid-template-columns: 1fr; gap: 14px; }
+  .da-card { padding: 16px; }
+  .navbar-back span { display: none; }
+}

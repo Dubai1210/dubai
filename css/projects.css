@@ -1,0 +1,168 @@
+/* ============================================================
+   项目展示页专属样式
+   ============================================================ */
+
+/* ---------- 页面标题 ---------- */
+.page-header {
+  text-align: center;
+  padding: clamp(48px, 8vw, 80px) var(--container-padding) clamp(24px, 4vw, 48px);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text);
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+.page-subtitle {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ---------- 项目卡片（扩展版：带文字区） ---------- */
+.gallery-section .project-card {
+  overflow: hidden;
+}
+
+.gallery-section .project-card-img {
+  border-radius: 0;
+}
+
+.project-card-body {
+  padding: 18px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-card-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.project-card-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary-hex);
+  margin-top: 4px;
+  transition: gap 0.25s;
+}
+
+.project-card:hover .project-card-link {
+  gap: 10px;
+}
+
+.project-card-link.muted {
+  color: var(--color-text-muted);
+}
+
+/* ---------- 占位卡片 ---------- */
+.project-card-placeholder {
+  opacity: 0.5;
+  cursor: default;
+  border: 2px dashed var(--color-border-strong);
+  background: transparent;
+  box-shadow: none;
+}
+
+.project-card-placeholder:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.placeholder-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-alt);
+  aspect-ratio: 16 / 9;
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  color: var(--color-border-strong);
+}
+
+/* ---------- 分隔线 ---------- */
+.gallery-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 56px) var(--container-padding);
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.divider-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- 后续计划区 ---------- */
+.gallery-section-future {
+  opacity: 0.7;
+}
+
+.section-title-muted {
+  color: var(--color-text-muted);
+}
+
+.section-title-muted::after {
+  background: var(--color-border-strong);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 768px) {
+  .page-header {
+    padding-top: 36px;
+  }
+
+  .project-card-body {
+    padding: 14px 12px 10px;
+    gap: 6px;
+  }
+
+  .project-card-name {
+    font-size: 1.05rem;
+  }
+
+  .gallery-divider {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .divider-label {
+    font-size: 0.75rem;
+  }
+}
