@@ -52,7 +52,8 @@
   var cached = null;
   try {
     localStorage.removeItem('daily-quote-cache');
-    cached = JSON.parse(localStorage.getItem('dq-cache'));
+    localStorage.removeItem('dq-cache');
+    cached = null; // 强制不使用缓存
   } catch (e) {}
 
   // 如果缓存日期是今天，直接使用
