@@ -71,10 +71,10 @@
   var today = new Date();
   var dateKey = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-  // 生成今日名言（不使用缓存）
-  var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-  var index = seed % quotes.length;
-  var quote = quotes[index];
+  // 显示蛊真人名言
+  var guzhenrenQuotes = quotes.filter(function(q) { return q.author === '蛊真人'; });
+  var randomIndex = Math.floor(Math.random() * guzhenrenQuotes.length);
+  var quote = guzhenrenQuotes[randomIndex];
 
   el.textContent = quote.text;
   if (authorEl) authorEl.textContent = '—— ' + quote.author;
