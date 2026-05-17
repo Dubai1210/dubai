@@ -76,6 +76,7 @@
   try {
     localStorage.removeItem('daily-quote-cache');
     localStorage.removeItem('dq-cache');
+    localStorage.removeItem('dq-v');
     cached = null; // 强制不使用缓存
   } catch (e) {}
 
